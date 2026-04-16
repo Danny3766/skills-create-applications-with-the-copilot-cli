@@ -1,17 +1,13 @@
 #!/usr/bin/env node
 
-// CLI Calculator
+// CLI Calculator (wrapper)
 // Supported operations:
 //   add or +  -> addition
 //   sub or -  -> subtraction
 //   mul or *  -> multiplication
 //   div or /  -> division
-//
-// Usage:
-//   node src/index.js <operation> <number1> <number2>
-// Examples:
-//   node src/index.js add 2 3
-//   node src/index.js + 4 5
+
+const { add, sub, mul, div } = require('./calculator');
 
 function showUsage() {
   console.log('Usage: node src/index.js <operation> <number1> <number2>');
@@ -34,24 +30,14 @@ if (!Number.isFinite(a) || !Number.isFinite(b)) {
 }
 
 const ops = {
-  add: (x, y) => x + y,
-  '+': (x, y) => x + y,
-  sub: (x, y) => x - y,
-  '-': (x, y) => x - y,
-  mul: (x, y) => x * y,
-  '*': (x, y) => x * y,
-  div: (x, y) => {
-    if (y === 0) {
-      throw new Error('Division by zero');
-    }
-    return x / y;
-  },
-  '/': (x, y) => {
-    if (y === 0) {
-      throw new Error('Division by zero');
-    }
-    return x / y;
-  }
+  add: add,
+  '+': add,
+  sub: sub,
+  '-': sub,
+  mul: mul,
+  '*': mul,
+  div: div,
+  '/': div
 };
 
 const fn = ops[op.toLowerCase()];
