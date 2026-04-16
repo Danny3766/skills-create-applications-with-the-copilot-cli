@@ -47,12 +47,12 @@ function power(base, exponent) {
   return base ** exponent;
 }
 
-function squareRoot(n) {
-  validateNumber(n, "n");
-  if (n < 0) {
+function squareRoot(value) {
+  validateNumber(value, "value");
+  if (value < 0) {
     throw new Error("Cannot calculate square root of a negative number");
   }
-  return Math.sqrt(n);
+  return Math.sqrt(value);
 }
 
 module.exports = {
