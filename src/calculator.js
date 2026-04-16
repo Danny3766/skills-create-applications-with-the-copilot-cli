@@ -1,66 +1,45 @@
-function validateNumber(value, name) {
-  if (typeof value !== "number" || Number.isNaN(value)) {
-    throw new TypeError(`${name} must be a valid number`);
-  }
-}
+// Calculator module
+// Supported operations:
+//   add or +  -> addition
+//   sub or -  -> subtraction
+//   mul or *  -> multiplication
+//   div or /  -> division
 
-function validateDivisor(value, name = "divisor") {
-  validateNumber(value, name);
-  if (value === 0) {
-    throw new Error("Cannot divide by zero");
-  }
-}
-
-function addition(a, b) {
-  validateNumber(a, "a");
-  validateNumber(b, "b");
+function add(a, b) {
   return a + b;
 }
 
-function subtraction(a, b) {
-  validateNumber(a, "a");
-  validateNumber(b, "b");
+function sub(a, b) {
   return a - b;
 }
 
-function multiplication(a, b) {
-  validateNumber(a, "a");
-  validateNumber(b, "b");
+function mul(a, b) {
   return a * b;
 }
 
-function division(a, b) {
-  validateNumber(a, "a");
-  validateDivisor(b, "b");
+function div(a, b) {
+  if (b === 0) {
+    throw new Error('Division by zero');
+  }
   return a / b;
 }
 
 function modulo(a, b) {
-  validateNumber(a, "a");
-  validateDivisor(b, "b");
+  if (b === 0) {
+    throw new Error('Modulo by zero');
+  }
   return a % b;
 }
 
 function power(base, exponent) {
-  validateNumber(base, "base");
-  validateNumber(exponent, "exponent");
-  return base ** exponent;
+  return Math.pow(base, exponent);
 }
 
-function squareRoot(value) {
-  validateNumber(value, "value");
-  if (value < 0) {
-    throw new Error("Cannot calculate square root of a negative number");
+function squareRoot(n) {
+  if (n < 0) {
+    throw new Error('Cannot take square root of negative number');
   }
-  return Math.sqrt(value);
+  return Math.sqrt(n);
 }
 
-module.exports = {
-  addition,
-  subtraction,
-  multiplication,
-  division,
-  modulo,
-  power,
-  squareRoot,
-};
+module.exports = { add, sub, mul, div, modulo, power, squareRoot };

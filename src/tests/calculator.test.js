@@ -1,56 +1,59 @@
-const test = require("node:test");
-const assert = require("node:assert/strict");
+const { add, sub, mul, div, modulo, power, squareRoot } = require('../calculator');
 
-const {
-  addition,
-  subtraction,
-  multiplication,
-  division,
-  modulo,
-  power,
-  squareRoot,
-} = require("../calculator");
+describe('Calculator basic operations', () => {
+  test('2 + 3 = 5', () => {
+    expect(add(2, 3)).toBe(5);
+  });
 
-test("addition returns sum", () => {
-  assert.equal(addition(2, 3), 5);
-});
+  test('10 - 4 = 6', () => {
+    expect(sub(10, 4)).toBe(6);
+  });
 
-test("subtraction returns difference", () => {
-  assert.equal(subtraction(9, 4), 5);
-});
+  test('45 * 2 = 90', () => {
+    expect(mul(45, 2)).toBe(90);
+  });
 
-test("multiplication returns product", () => {
-  assert.equal(multiplication(3, 4), 12);
-});
+  test('20 / 5 = 4', () => {
+    expect(div(20, 5)).toBe(4);
+  });
 
-test("division returns quotient", () => {
-  assert.equal(division(12, 3), 4);
-});
+  test('division by zero throws', () => {
+    expect(() => div(1, 0)).toThrow('Division by zero');
+  });
 
-test("division throws on zero divisor", () => {
-  assert.throws(() => division(12, 0), /divide by zero/i);
-});
+  test('works with negative numbers and floats', () => {
+    expect(add(-1, 1)).toBe(0);
+    expect(sub(1.5, 0.5)).toBeCloseTo(1.0);
+    expect(mul(-2, -3)).toBe(6);
+    expect(div(7.5, 2.5)).toBeCloseTo(3.0);
+  });
 
-test("modulo returns remainder", () => {
-  assert.equal(modulo(10, 3), 1);
-});
+  // Extended operations
+  test('5 % 2 = 1 (modulo)', () => {
+    expect(modulo(5, 2)).toBe(1);
+  });
 
-test("modulo throws on zero divisor", () => {
-  assert.throws(() => modulo(10, 0), /divide by zero/i);
-});
+  test('modulo by zero throws', () => {
+    expect(() => modulo(1, 0)).toThrow('Modulo by zero');
+  });
 
-test("power returns exponentiation result", () => {
-  assert.equal(power(2, 5), 32);
-});
+  test('2 ^ 3 = 8 (power)', () => {
+    expect(power(2, 3)).toBe(8);
+  });
 
-test("power handles fractional exponents", () => {
-  assert.equal(power(9, 0.5), 3);
-});
+  test('power with negative exponent', () => {
+    expect(power(2, -2)).toBeCloseTo(0.25);
+  });
 
-test("square root returns value for non-negative number", () => {
-  assert.equal(squareRoot(81), 9);
-});
+  test('square root of 16 = 4', () => {
+    expect(squareRoot(16)).toBe(4);
+  });
 
-test("square root throws for negative number", () => {
-  assert.throws(() => squareRoot(-1), /square root of a negative number/i);
+  test('square root of 2 is approximately 1.414', () => {
+    expect(squareRoot(2)).toBeCloseTo(Math.SQRT2);
+  });
+
+  test('square root of negative throws', () => {
+    expect(() => squareRoot(-1)).toThrow('Cannot take square root of negative number');
+  });
 });
